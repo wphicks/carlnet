@@ -1,0 +1,5 @@
+main
+run_tests
+*.o
+*.swp
+*.gch
