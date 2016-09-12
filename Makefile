@@ -14,6 +14,9 @@ tests: $(TEST_SRCS) $(OBJS)
 node.o: src/node.cpp
 	$(CXX) $(CXXFLAGS) -c src/node.cpp
 
+sand.o: src/sand.cpp
+	$(CXX) $(CXXFLAGS) -c src/sand.cpp
+
 clean:
 	rm *.o main run_tests
 
