@@ -15,6 +15,7 @@ class CellNode {
         add_neighbor(*neighbor_iter);
       }
     }
+    virtual ~CellNode();
     int get_rank();
     /*! \brief Return the number of neighbors for this node
      */
@@ -27,9 +28,13 @@ class CellNode {
     bool has_neighbor(CellNode* test_neighbor);
     /*! \brief Check to see if given node is a neighbor
      */
-    // virtual bool iterate();
+    virtual bool iterate();
     /*! \brief Perform the next iteration of the cell's lifecycle
+     *
+     * \return bool indicating whether a node "fired" on this iteration
      */
+    virtual int get_grains();
+
  private:
     set<CellNode*> neighbors;
     /*! \brief A list of pointers to the neighbors of this node

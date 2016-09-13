@@ -1,5 +1,6 @@
 main
 run_tests
+gmon.out
 *.o
 *.swp
 *.gch

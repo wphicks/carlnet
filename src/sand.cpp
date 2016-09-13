@@ -1,8 +1,8 @@
 #include "sand.hpp"
 SandNode::SandNode() :
-    grains{0}, CellNode() {
+    CellNode(), grains{0} {
 }
 
-int SandNode::get_grains(){
+int SandNode::get_grains() {
   return grains;
 }

@@ -64,5 +64,10 @@ BOOST_AUTO_TEST_CASE(remove_neighbor_test) {
   BOOST_CHECK(!test_node.has_neighbor(node_fix.node0));
 }
 
+BOOST_AUTO_TEST_CASE(iteration_test) {
+  CellNode test_node;
+  BOOST_CHECK(!test_node.iterate());
+}
+
 BOOST_AUTO_TEST_SUITE_END()
 

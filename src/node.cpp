@@ -4,10 +4,8 @@ CellNode::CellNode() :
     rank{0} {
 }
 
-// CellNode::CellNode(const list<CellNode*> &all_neighbors) :
-//     neighbors{all_neighbors} {
-//   rank = neighbors.size();
-// }
+CellNode::~CellNode() {
+}
 
 int CellNode::get_rank() {
   return rank;
@@ -30,4 +28,12 @@ void CellNode::remove_neighbor(CellNode* old_neighbor) {
 
 bool CellNode::has_neighbor(CellNode* test_neighbor) {
   return (neighbors.find(test_neighbor) != neighbors.end());
+}
+
+bool iterate() {
+  return false;
+}
+
+int get_grains() {
+  return 0;
 }

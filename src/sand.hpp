@@ -6,7 +6,7 @@ class SandNode : public CellNode {
  public:
     SandNode();
     template <template <typename...> class Iterable>
-    explicit SandNode(const Iterable<SandNode*> &all_neighbors) :
+    explicit SandNode(const Iterable<CellNode*> &all_neighbors) :
         CellNode(all_neighbors) {
     }
     int get_grains();

@@ -11,7 +11,7 @@ struct SandNodeFixture {
   SandNode * node1;
   SandNode * node2;
   SandNode * node3;
-  set<SandNode*> node_set;
+  set<CellNode*> node_set;
   SandNodeFixture() {
     node0 = new SandNode;
     node1 = new SandNode;

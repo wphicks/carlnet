@@ -5,8 +5,8 @@ TEST_SRCS=test/*_test.cpp
 
 OBJS=node.o
 
-all: src/main.cpp $(OBJS)
-	$(CXX) -o main $(CXXFLAGS) src/main.cpp $(OBJS)
+# all: src/main.cpp $(OBJS)
+#	$(CXX) -o main $(CXXFLAGS) src/main.cpp $(OBJS)
 
 tests: $(TEST_SRCS) $(OBJS)
 	$(CXX) $(CXXFLAGS) $(INCFLAGS) $(TEST_SRCS) $(OBJS) -lboost_unit_test_framework -o run_tests
