@@ -34,6 +34,7 @@ BOOST_AUTO_TEST_SUITE(node_suite)
 BOOST_AUTO_TEST_CASE(default_constructor_test) {
   CellNode test_node;
   BOOST_CHECK_EQUAL(test_node.get_rank(), 0);
+  BOOST_CHECK_EQUAL(test_node.get_value(), 0);
 }
 
 BOOST_AUTO_TEST_CASE(iterable_constructor_test) {

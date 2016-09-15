@@ -9,17 +9,18 @@ class SandNode : public CellNode {
     explicit SandNode(const Iterable<CellNode*> &all_neighbors) :
         CellNode(all_neighbors) {
     }
-    int get_grains();
+    ~SandNode();
+    int get_value();
     /*! \brief Return number of grains on this node
      */
-    void add_grain();
+    bool increment_value();
     /*! \brief Add a grain to this node
      */
     bool iterate();
     /*! \brief Iterate sandpile dynamics for this node
      */
  private:
-    int grains;
+    int value;
      /*! \brief The number of "grains" on this node
       */
 };

@@ -30,10 +30,14 @@ bool CellNode::has_neighbor(CellNode* test_neighbor) {
   return (neighbors.find(test_neighbor) != neighbors.end());
 }
 
-bool iterate() {
+bool CellNode::iterate() {
   return false;
 }
 
-int get_grains() {
+int CellNode::get_value() {
   return 0;
+}
+
+bool CellNode::increment_value() {
+  return false;
 }

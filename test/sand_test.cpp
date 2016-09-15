@@ -33,15 +33,15 @@ BOOST_AUTO_TEST_SUITE(sand_suite)
 
 BOOST_AUTO_TEST_CASE(default_constructor_test) {
   SandNode test_node;
-  BOOST_CHECK_EQUAL(test_node.get_grains(), 0);
+  BOOST_CHECK_EQUAL(test_node.get_value(), 0);
 }
 
 BOOST_AUTO_TEST_CASE(add_grain_test) {
   SandNodeFixture node_fix;
   SandNode test_node {node_fix.node_set};
-  BOOST_CHECK_EQUAL(test_node.get_grains(), 0);
-  test_node.add_grain();
-  BOOST_CHECK_EQUAL(test_node.get_grains(), 1);
+  BOOST_CHECK_EQUAL(test_node.get_value(), 0);
+  test_node.increment_value();
+  BOOST_CHECK_EQUAL(test_node.get_value(), 1);
 }
 
 BOOST_AUTO_TEST_CASE(iterate_test) {
@@ -49,12 +49,12 @@ BOOST_AUTO_TEST_CASE(iterate_test) {
   SandNode test_node {node_fix.node_set};
   BOOST_CHECK(!test_node.iterate());
   for (int i=0; i < node_fix.node_set.size(); ++i) {
-    test_node.add_grain();
+    test_node.increment_value();
   }
   BOOST_CHECK(test_node.iterate());
-  BOOST_CHECK_EQUAL(test_node.get_grains(), 0);
+  BOOST_CHECK_EQUAL(test_node.get_value(), 0);
   for (auto node_iter : node_fix.node_set) {
-    BOOST_CHECK_EQUAL(node_iter->get_grains(), 1);
+    BOOST_CHECK_EQUAL(node_iter->get_value(), 1);
   }
 }
 

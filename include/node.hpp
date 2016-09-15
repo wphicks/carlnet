@@ -28,17 +28,26 @@ class CellNode {
     bool has_neighbor(CellNode* test_neighbor);
     /*! \brief Check to see if given node is a neighbor
      */
+    virtual int get_value();
+    /*! \brief Return value associated with this node
+     */
+    virtual bool increment_value();
+    /*! \brief Increment value associated with this node
+     *
+     * \return bool indicating whether value was successfully incremented
+     */
     virtual bool iterate();
     /*! \brief Perform the next iteration of the cell's lifecycle
      *
      * \return bool indicating whether a node "fired" on this iteration
      */
-    virtual int get_grains();
 
- private:
+ protected:
     set<CellNode*> neighbors;
     /*! \brief A list of pointers to the neighbors of this node
      */
+
+ private:
     int rank;
     /*! \brief The number of neighbors of this node
      */
