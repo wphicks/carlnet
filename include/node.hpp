@@ -1,7 +1,9 @@
 #ifndef INCLUDE_NODE_HPP_
 #define INCLUDE_NODE_HPP_
 #include <set>
+#include <memory>
 using std::set;
+using std::shared_ptr;
 
 class CellNode {
     /*! \brief A node in an undirected graph of cellular automata
@@ -9,7 +11,7 @@ class CellNode {
  public:
     CellNode();
     template <template <typename...> class Iterable>
-    explicit CellNode(const Iterable<CellNode*> &all_neighbors) {
+    explicit CellNode(const Iterable<shared_ptr<CellNode>> &all_neighbors) {
       for (
           auto neighbor_iter = all_neighbors.begin();
           neighbor_iter != all_neighbors.end();
@@ -21,13 +23,13 @@ class CellNode {
     int get_rank();
     /*! \brief Return the number of neighbors for this node
      */
-    void add_neighbor(CellNode* new_neighbor);
+    void add_neighbor(shared_ptr<CellNode> new_neighbor);
     /*! \brief Add neighbor to node
      */
-    void remove_neighbor(CellNode* old_neighbor);
+    void remove_neighbor(shared_ptr<CellNode> old_neighbor);
     /*! \brief Remove neighbor from node
      */
-    bool has_neighbor(CellNode* test_neighbor);
+    bool has_neighbor(shared_ptr<CellNode> test_neighbor);
     /*! \brief Check to see if given node is a neighbor
      */
     virtual int get_value();
@@ -45,7 +47,7 @@ class CellNode {
      */
 
  protected:
-    set<CellNode*> neighbors;
+    set<shared_ptr<CellNode>> neighbors;
     /*! \brief A list of pointers to the neighbors of this node
      */
 

@@ -1,31 +1,27 @@
 #define BOOST_TEST_DYN_LINK
 #define BOOST_TEST_MODULE linked_list_test
 #include <set>
+#include <memory>
 #include <boost/test/included/unit_test.hpp>
 #include "node.hpp"
 
 using std::set;
+using std::shared_ptr;
 
 struct CellNodeFixture {
-  CellNode * node0;
-  CellNode * node1;
-  CellNode * node2;
-  CellNode * node3;
-  set<CellNode*> node_set;
-  CellNodeFixture() {
-    node0 = new CellNode;
-    node1 = new CellNode;
-    node2 = new CellNode;
-    node3 = new CellNode;
+  shared_ptr<CellNode> node0;
+  shared_ptr<CellNode> node1;
+  shared_ptr<CellNode> node2;
+  shared_ptr<CellNode> node3;
+  set<shared_ptr<CellNode>> node_set;
+  CellNodeFixture() :
+      node0{new CellNode}, node1{new CellNode}, node2{new CellNode},
+      node3{new CellNode} {
     node_set.insert(node0);
     node_set.insert(node1);
     node_set.insert(node2);
   }
   ~CellNodeFixture() {
-    delete node0;
-    delete node1;
-    delete node2;
-    delete node3;
   }
 };
 

@@ -1,6 +1,8 @@
 #ifndef INCLUDE_SAND_HPP_
 #define INCLUDE_SAND_HPP_
+#include<memory>
 #include "node.hpp"
+using std::shared_ptr;
 
 class SandNode : public CellNode {
   /*! \brief A node in a sandpile model
@@ -8,7 +10,7 @@ class SandNode : public CellNode {
  public:
     SandNode();
     template <template <typename...> class Iterable>
-    explicit SandNode(const Iterable<CellNode*> &all_neighbors) :
+    explicit SandNode(const Iterable<shared_ptr<CellNode>> &all_neighbors) :
         CellNode(all_neighbors) {
     }
     ~SandNode();

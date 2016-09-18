@@ -7,25 +7,19 @@
 using std::set;
 
 struct SandNodeFixture {
-  SandNode * node0;
-  SandNode * node1;
-  SandNode * node2;
-  SandNode * node3;
-  set<CellNode*> node_set;
-  SandNodeFixture() {
-    node0 = new SandNode;
-    node1 = new SandNode;
-    node2 = new SandNode;
-    node3 = new SandNode;
+  shared_ptr<CellNode> node0;
+  shared_ptr<CellNode> node1;
+  shared_ptr<CellNode> node2;
+  shared_ptr<CellNode> node3;
+  set<shared_ptr<CellNode>> node_set;
+  SandNodeFixture() :
+      node0{new SandNode}, node1{new SandNode}, node2{new SandNode},
+      node3{new SandNode} {
     node_set.insert(node0);
     node_set.insert(node1);
     node_set.insert(node2);
   }
   ~SandNodeFixture() {
-    delete node0;
-    delete node1;
-    delete node2;
-    delete node3;
   }
 };
 
