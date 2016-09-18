@@ -1,3 +1,5 @@
+#ifndef INCLUDE_NODE_HPP_
+#define INCLUDE_NODE_HPP_
 #include <set>
 using std::set;
 
@@ -52,3 +54,4 @@ class CellNode {
     /*! \brief The number of neighbors of this node
      */
 };
+#endif  // INCLUDE_NODE_HPP_

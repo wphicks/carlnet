@@ -1,3 +1,5 @@
+#ifndef INCLUDE_SAND_HPP_
+#define INCLUDE_SAND_HPP_
 #include "node.hpp"
 
 class SandNode : public CellNode {
@@ -24,3 +26,4 @@ class SandNode : public CellNode {
      /*! \brief The number of "grains" on this node
       */
 };
+#endif  // INCLUDE_SAND_HPP_
