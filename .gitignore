@@ -1,5 +1,5 @@
 main
-run_tests
+*_test
 gmon.out
 Session.vim
 *.o
