@@ -18,6 +18,7 @@ void CellNode::add_neighbor(shared_ptr<CellNode> new_neighbor) {
     neighbors.insert(new_neighbor);
     ++rank;
   }
+  // TODO: Implement symmetric addition via mixin
 }
 
 void CellNode::remove_neighbor(shared_ptr<CellNode> old_neighbor) {

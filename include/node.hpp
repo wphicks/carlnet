@@ -9,7 +9,7 @@ using std::logic_error;
 using std::static_pointer_cast;
 
 class CellNode {
-    /*! \brief A node in an undirected graph of cellular automata
+    /*! \brief A node in a directed graph of automata
      */
  public:
     CellNode();

@@ -50,6 +50,8 @@ BOOST_AUTO_TEST_CASE(iterate_test) {
   for (auto node : pile_fix.node_set) {
     test_node->add_neighbor(node);
   }
+  BOOST_CHECK_EQUAL(test_node->get_value(), 0);
+  BOOST_CHECK_EQUAL(test_node->get_rank(), pile_fix.node_set.size());
   test_pile.add_node(test_node);
   BOOST_CHECK_EQUAL(test_pile.iterate(), 0);
   for (int i=0; i < pile_fix.node_set.size(); ++i) {

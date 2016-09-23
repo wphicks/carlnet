@@ -24,7 +24,7 @@ void SandPile::add_node(shared_ptr<SandNode> new_node) {
 int SandPile::iterate() {
   int avalanches = 0;
   for (auto node_ : nodes) {
-    if (node_->iterate()) {
+    if (node_->iterate() && node_->get_rank()) {
       ++avalanches;
     }
   }
