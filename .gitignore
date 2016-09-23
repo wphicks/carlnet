@@ -1,6 +1,7 @@
 main
 run_tests
 gmon.out
+Session.vim
 *.o
 *.swp
 *.gch

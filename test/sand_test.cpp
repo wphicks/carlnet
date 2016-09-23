@@ -1,20 +1,21 @@
 #define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE linked_list_test
+#define BOOST_TEST_MODULE sand_test
 #include <set>
+#include <memory>
 #include <boost/test/included/unit_test.hpp>
 #include "sand.hpp"
 
 using std::set;
+using std::shared_ptr;
+using std::make_shared;
 
 struct SandNodeFixture {
-  shared_ptr<CellNode> node0;
-  shared_ptr<CellNode> node1;
-  shared_ptr<CellNode> node2;
-  shared_ptr<CellNode> node3;
+  shared_ptr<CellNode> node0 = make_shared<SandNode>();
+  shared_ptr<CellNode> node1 = make_shared<SandNode>();
+  shared_ptr<CellNode> node2 = make_shared<SandNode>();
+  shared_ptr<CellNode> node3 = make_shared<SandNode>();
   set<shared_ptr<CellNode>> node_set;
-  SandNodeFixture() :
-      node0{new SandNode}, node1{new SandNode}, node2{new SandNode},
-      node3{new SandNode} {
+  SandNodeFixture() {
     node_set.insert(node0);
     node_set.insert(node1);
     node_set.insert(node2);
@@ -38,12 +39,23 @@ BOOST_AUTO_TEST_CASE(add_grain_test) {
   BOOST_CHECK_EQUAL(test_node.get_value(), 1);
 }
 
+BOOST_AUTO_TEST_CASE(add_neighbor_test) {
+  SandNodeFixture node_fix;
+  SandNode test_node {node_fix.node_set};
+  BOOST_CHECK(!test_node.has_neighbor(node_fix.node3));
+  test_node.add_neighbor(node_fix.node3);
+  BOOST_CHECK(test_node.has_neighbor(node_fix.node3));
+}
+
 BOOST_AUTO_TEST_CASE(iterate_test) {
   SandNodeFixture node_fix;
   SandNode test_node {node_fix.node_set};
   BOOST_CHECK(!test_node.iterate());
   for (int i=0; i < node_fix.node_set.size(); ++i) {
     test_node.increment_value();
+  }
+  for (auto node_iter : node_fix.node_set) {
+    BOOST_CHECK_EQUAL(node_iter->get_value(), 0);
   }
   BOOST_CHECK(test_node.iterate());
   BOOST_CHECK_EQUAL(test_node.get_value(), 0);

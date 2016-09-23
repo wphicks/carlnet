@@ -1,5 +1,5 @@
 #define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE linked_list_test
+#define BOOST_TEST_MODULE node_test
 #include <set>
 #include <memory>
 #include <boost/test/included/unit_test.hpp>
@@ -7,16 +7,15 @@
 
 using std::set;
 using std::shared_ptr;
+using std::make_shared;
 
 struct CellNodeFixture {
-  shared_ptr<CellNode> node0;
-  shared_ptr<CellNode> node1;
-  shared_ptr<CellNode> node2;
-  shared_ptr<CellNode> node3;
+  shared_ptr<CellNode> node0 = make_shared<CellNode>();
+  shared_ptr<CellNode> node1 = make_shared<CellNode>();
+  shared_ptr<CellNode> node2 = make_shared<CellNode>();
+  shared_ptr<CellNode> node3 = make_shared<CellNode>();
   set<shared_ptr<CellNode>> node_set;
-  CellNodeFixture() :
-      node0{new CellNode}, node1{new CellNode}, node2{new CellNode},
-      node3{new CellNode} {
+  CellNodeFixture() {
     node_set.insert(node0);
     node_set.insert(node1);
     node_set.insert(node2);

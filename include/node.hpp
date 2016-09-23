@@ -2,8 +2,11 @@
 #define INCLUDE_NODE_HPP_
 #include <set>
 #include <memory>
+#include <stdexcept>
 using std::set;
 using std::shared_ptr;
+using std::logic_error;
+using std::static_pointer_cast;
 
 class CellNode {
     /*! \brief A node in an undirected graph of cellular automata
@@ -26,6 +29,21 @@ class CellNode {
     void add_neighbor(shared_ptr<CellNode> new_neighbor);
     /*! \brief Add neighbor to node
      */
+    template <class NodeType>
+    void add_neighbor(shared_ptr<NodeType> new_neighbor) {
+    /*! \brief Add neighbor to node
+     *
+     * \throw If the provided pointer cannot be cast to a shared_ptr<CellNode>,
+     * this method will throw a logic_error.
+     */
+      shared_ptr<CellNode> cell_neighbor =
+        static_pointer_cast<CellNode>(new_neighbor);
+      if (cell_neighbor) {
+        add_neighbor(cell_neighbor);
+      } else {
+        throw logic_error("New neighbor could not be cast to shared_ptr<CellNode>");
+      }
+    }
     void remove_neighbor(shared_ptr<CellNode> old_neighbor);
     /*! \brief Remove neighbor from node
      */
