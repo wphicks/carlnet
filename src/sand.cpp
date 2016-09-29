@@ -19,7 +19,7 @@ bool SandNode::iterate() {
   if (get_rank() <= get_value()) {
     value -= get_rank();
     for (auto node : neighbors) {
-      node->increment_value();
+      node.lock()->increment_value();
     }
     return true;
   }

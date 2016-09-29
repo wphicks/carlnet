@@ -1,9 +1,9 @@
 #ifndef INCLUDE_NODE_HPP_
 #define INCLUDE_NODE_HPP_
-#include <set>
+#include <vector>
 #include <memory>
 #include <stdexcept>
-using std::set;
+using std::vector;
 using std::shared_ptr;
 using std::weak_ptr;
 using std::owner_less;
@@ -77,7 +77,7 @@ class CellNode : public enable_shared_from_this<CellNode> {
      */
 
  protected:
-    set<weak_ptr<CellNode>, owner_less<weak_ptr<CellNode>>> neighbors;
+    vector<weak_ptr<CellNode>> neighbors;
     /*! \brief A list of pointers to the neighbors of this node
      */
 
