@@ -3,11 +3,11 @@
 
 using std::make_shared;
 
-SandPile::SandPile() : size{0} {
+SandPile::SandPile() : size{1} {
 }
 
-SandPile::SandPile(int num_nodes) : size{0} {
-  for (int i=0; i < num_nodes; ++i) {
+SandPile::SandPile(int num_nodes) : size{1} {
+  for (int i=0; i < num_nodes - 1; ++i) {
     add_node(make_shared<SandNode>());
   }
 }

@@ -9,7 +9,7 @@ class SandPile {
  public:
     SandPile();
     template <template <typename...> class Iterable>
-    explicit SandPile(const Iterable<shared_ptr<SandNode>> &all_nodes) {
+    explicit SandPile(const Iterable<shared_ptr<SandNode>> &all_nodes) : size{1} {
       for (
           auto node_iter = all_nodes.begin();
           node_iter != all_nodes.end();
@@ -18,6 +18,8 @@ class SandPile {
       }
     }
     explicit SandPile(int num_nodes);
+    /*! \brief Create sandpile with given number of nodes (including sink node)
+     */
     int get_size();
     /*! \brief Return the number of nodes in this sandpile
      */
@@ -35,6 +37,11 @@ class SandPile {
 
  private:
     int size;
+    /*! \brief The number of nodes in this sandpile
+     */
+    CellNode sink;
+    /*! \brief A node whose value never increases
+     */
 };
 
 #endif  // INCLUDE_SANDPILE_HPP_

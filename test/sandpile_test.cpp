@@ -28,13 +28,13 @@ BOOST_AUTO_TEST_SUITE(sandpile_suite)
 
 BOOST_AUTO_TEST_CASE(default_constructor_test) {
   SandPile test_pile;
-  BOOST_CHECK_EQUAL(test_pile.get_size(), 0);
+  BOOST_CHECK_EQUAL(test_pile.get_size(), 1);
 }
 
 BOOST_AUTO_TEST_CASE(iterable_constructor_test) {
   SandPileFixture pile_fix;
   SandPile test_pile {pile_fix.node_set};
-  BOOST_CHECK_EQUAL(test_pile.get_size(), pile_fix.node_set.size());
+  BOOST_CHECK_EQUAL(test_pile.get_size(), pile_fix.node_set.size() + 1);
 }
 
 BOOST_AUTO_TEST_CASE(length_constructor_test) {

@@ -5,10 +5,13 @@
 #include <stdexcept>
 using std::set;
 using std::shared_ptr;
+using std::weak_ptr;
+using std::owner_less;
 using std::logic_error;
 using std::static_pointer_cast;
+using std::enable_shared_from_this;
 
-class CellNode {
+class CellNode : public enable_shared_from_this<CellNode> {
     /*! \brief A node in a directed graph of automata
      */
  public:
@@ -26,9 +29,13 @@ class CellNode {
     int get_rank();
     /*! \brief Return the number of neighbors for this node
      */
-    void add_neighbor(shared_ptr<CellNode> new_neighbor);
+    void add_neighbor(shared_ptr<CellNode> new_neighbor, bool mutual);
     /*! \brief Add neighbor to node
+     *
+     * \param new_neighbor: the neighbor to add
+     * \param mutual: also make this node a neighbor of the added node
      */
+    void add_neighbor(shared_ptr<CellNode> new_neighbor);
     template <class NodeType>
     void add_neighbor(shared_ptr<NodeType> new_neighbor) {
     /*! \brief Add neighbor to node
@@ -44,9 +51,14 @@ class CellNode {
         throw logic_error("New neighbor could not be cast to shared_ptr<CellNode>");
       }
     }
-    void remove_neighbor(shared_ptr<CellNode> old_neighbor);
+    void remove_neighbor(shared_ptr<CellNode> old_neighbor, bool mutual);
     /*! \brief Remove neighbor from node
+     *
+     * \param old_neighbor: the neighbor to remove
+     * \param mutual: also remove this node as a neighbor of the added node (if
+     * it is currently a neighbor)
      */
+    void remove_neighbor(shared_ptr<CellNode> old_neighbor);
     bool has_neighbor(shared_ptr<CellNode> test_neighbor);
     /*! \brief Check to see if given node is a neighbor
      */
@@ -65,7 +77,7 @@ class CellNode {
      */
 
  protected:
-    set<shared_ptr<CellNode>> neighbors;
+    set<weak_ptr<CellNode>, owner_less<weak_ptr<CellNode>>> neighbors;
     /*! \brief A list of pointers to the neighbors of this node
      */
 

@@ -52,12 +52,25 @@ BOOST_AUTO_TEST_CASE(add_neighbor_test) {
   BOOST_CHECK(test_node.has_neighbor(node_fix.node3));
 }
 
+BOOST_AUTO_TEST_CASE(add_neighbor_mutual_test) {
+  CellNodeFixture node_fix;
+  shared_ptr<CellNode> test_node = make_shared<CellNode>(node_fix.node_set);
+  BOOST_CHECK(!test_node->has_neighbor(node_fix.node3));
+  BOOST_CHECK(!node_fix.node3->has_neighbor(test_node));
+  test_node->add_neighbor(node_fix.node3, true);
+  BOOST_CHECK(test_node->has_neighbor(node_fix.node3));
+  BOOST_CHECK(node_fix.node3->has_neighbor(test_node));
+}
+
 BOOST_AUTO_TEST_CASE(remove_neighbor_test) {
   CellNodeFixture node_fix;
-  CellNode test_node {node_fix.node_set};
-  BOOST_CHECK(test_node.has_neighbor(node_fix.node0));
-  test_node.remove_neighbor(node_fix.node0);
-  BOOST_CHECK(!test_node.has_neighbor(node_fix.node0));
+  shared_ptr<CellNode> test_node = make_shared<CellNode>();
+  test_node->add_neighbor(node_fix.node0, true);
+  BOOST_CHECK(test_node->has_neighbor(node_fix.node0));
+  BOOST_CHECK(node_fix.node0->has_neighbor(test_node));
+  test_node->remove_neighbor(node_fix.node0, true);
+  BOOST_CHECK(!test_node->has_neighbor(node_fix.node0));
+  BOOST_CHECK(!node_fix.node0->has_neighbor(test_node));
 }
 
 BOOST_AUTO_TEST_CASE(iteration_test) {

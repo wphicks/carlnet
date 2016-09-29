@@ -13,20 +13,33 @@ int CellNode::get_rank() {
   return rank;
 }
 
-void CellNode::add_neighbor(shared_ptr<CellNode> new_neighbor) {
+void CellNode::add_neighbor(shared_ptr<CellNode> new_neighbor, bool mutual) {
   if (new_neighbor.get() != this) {
     neighbors.insert(new_neighbor);
     ++rank;
   }
-  // TODO: Implement symmetric addition via mixin
+  if (mutual) {
+    new_neighbor->add_neighbor(shared_from_this());
+  }
 }
 
-void CellNode::remove_neighbor(shared_ptr<CellNode> old_neighbor) {
+void CellNode::add_neighbor(shared_ptr<CellNode> new_neighbor) {
+  return add_neighbor(new_neighbor, false);
+}
+
+void CellNode::remove_neighbor(shared_ptr<CellNode> old_neighbor, bool mutual) {
   auto location = neighbors.find(old_neighbor);
   if (location != neighbors.end()) {
     neighbors.erase(location);
     --rank;
   }
+  if (mutual) {
+    old_neighbor->remove_neighbor(shared_from_this());
+  }
+}
+
+void CellNode::remove_neighbor(shared_ptr<CellNode> old_neighbor) {
+  return remove_neighbor(old_neighbor, false);
 }
 
 bool CellNode::has_neighbor(shared_ptr<CellNode> test_neighbor) {

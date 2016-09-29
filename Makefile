@@ -1,11 +1,19 @@
 CXX=clang++
-CXXFLAGS=-pg -Wall -std=c++14
+CXXFLAGS=-g -Wall -std=c++14
 INCFLAGS=-Iinclude
+VALFLAGS=--leak-check=full --undef-value-errors=no
 
 OBJS=node.o sand.o sandpile.o
 
-# all: src/main.cpp $(OBJS)
-#	$(CXX) -o main $(CXXFLAGS) src/main.cpp $(OBJS)
+all: $(TEST_SRCS) $(OBJS)
+	$(CXX) $(CXXFLAGS) $(INCFLAGS) test/node_test.cpp $(OBJS) -lboost_unit_test_framework -o node_test
+	$(CXX) $(CXXFLAGS) $(INCFLAGS) test/sand_test.cpp $(OBJS) -lboost_unit_test_framework -o sand_test
+	$(CXX) $(CXXFLAGS) $(INCFLAGS) test/sandpile_test.cpp $(OBJS) -lboost_unit_test_framework -o sandpile_test
+
+memory: tests
+	valgrind $(VALFLAGS) ./node_test
+	valgrind $(VALFLAGS) ./sand_test
+	valgrind $(VALFLAGS) ./sandpile_test
 
 tests: $(TEST_SRCS) $(OBJS)
 	$(CXX) $(CXXFLAGS) $(INCFLAGS) test/node_test.cpp $(OBJS) -lboost_unit_test_framework -o node_test
