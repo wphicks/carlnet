@@ -43,6 +43,16 @@ BOOST_AUTO_TEST_CASE(length_constructor_test) {
   BOOST_CHECK_EQUAL(test_pile.get_size(), test_size);
 }
 
+BOOST_AUTO_TEST_CASE(iterate_nodes_test) {
+  SandPileFixture pile_fix;
+  SandPile test_pile {pile_fix.node_set};
+  int size = 1;
+  for (auto node_ : test_pile) {
+    ++size;
+  }
+  BOOST_CHECK_EQUAL(size, test_pile.get_size());
+}
+
 BOOST_AUTO_TEST_CASE(iterate_test) {
   SandPileFixture pile_fix;
   SandPile test_pile {pile_fix.node_set};

@@ -9,6 +9,7 @@ all: $(TEST_SRCS) $(OBJS)
 	$(CXX) $(CXXFLAGS) $(INCFLAGS) test/node_test.cpp $(OBJS) -lboost_unit_test_framework -o node_test
 	$(CXX) $(CXXFLAGS) $(INCFLAGS) test/sand_test.cpp $(OBJS) -lboost_unit_test_framework -o sand_test
 	$(CXX) $(CXXFLAGS) $(INCFLAGS) test/sandpile_test.cpp $(OBJS) -lboost_unit_test_framework -o sandpile_test
+	$(CXX) $(CXXFLAGS) $(INCFLAGS) test/linking_test.cpp $(OBJS) -lboost_unit_test_framework -o linking_test
 
 memory: tests
 	valgrind $(VALFLAGS) ./node_test
@@ -22,6 +23,12 @@ tests: $(TEST_SRCS) $(OBJS)
 	./sand_test
 	$(CXX) $(CXXFLAGS) $(INCFLAGS) test/sandpile_test.cpp $(OBJS) -lboost_unit_test_framework -o sandpile_test
 	./sandpile_test
+	$(CXX) $(CXXFLAGS) $(INCFLAGS) test/linking_test.cpp $(OBJS) -lboost_unit_test_framework -o linking_test
+	./linking_test
+
+current: $(TEST_SRCS) $(OBJS)
+	$(CXX) $(CXXFLAGS) $(INCFLAGS) test/linking_test.cpp $(OBJS) -lboost_unit_test_framework -o linking_test
+	./linking_test
 
 node.o: src/node.cpp
 	$(CXX) $(CXXFLAGS) $(INCFLAGS) -c src/node.cpp

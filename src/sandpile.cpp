@@ -1,7 +1,9 @@
 #include <memory>
+#include <vector>
 #include "sandpile.hpp"
 
 using std::make_shared;
+using std::vector;
 
 SandPile::SandPile() : size{1} {
 }
@@ -29,4 +31,12 @@ int SandPile::iterate() {
     }
   }
   return avalanches;
+}
+
+vector<shared_ptr<SandNode>>::const_iterator SandPile::begin() {
+  return nodes.cbegin();
+}
+
+vector<shared_ptr<SandNode>>::const_iterator SandPile::end() {
+  return nodes.cend();
 }

@@ -4,6 +4,7 @@
 #include <vector>
 #include "sand.hpp"
 using std::vector;
+using std::iterator;
 
 class SandPile {
  public:
@@ -30,6 +31,12 @@ class SandPile {
     /*! \brief Iterate sandpile dynamics forward one timestep
      *
      * \return The number of nodes that "avalanched"
+     */
+    vector<shared_ptr<SandNode>>::const_iterator begin();
+    /*! \brief Return iterator to first node in pile
+     */
+    vector<shared_ptr<SandNode>>::const_iterator end();
+    /*! \brief Return iterator to end of pile
      */
 
  protected:
