@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "sand.hpp"
+using std::make_shared;
 using std::vector;
 using std::iterator;
 
@@ -10,7 +11,8 @@ class SandPile {
  public:
     SandPile();
     template <template <typename...> class Iterable>
-    explicit SandPile(const Iterable<shared_ptr<SandNode>> &all_nodes) : size{1} {
+    explicit SandPile(const Iterable<shared_ptr<SandNode>> &all_nodes) : size{0} {
+      add_node(make_shared<SandNode>());
       for (
           auto node_iter = all_nodes.begin();
           node_iter != all_nodes.end();
@@ -45,9 +47,6 @@ class SandPile {
  private:
     int size;
     /*! \brief The number of nodes in this sandpile
-     */
-    CellNode sink;
-    /*! \brief A node whose value never increases
      */
 };
 

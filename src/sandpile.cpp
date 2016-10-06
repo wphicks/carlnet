@@ -5,11 +5,12 @@
 using std::make_shared;
 using std::vector;
 
-SandPile::SandPile() : size{1} {
+SandPile::SandPile() : size{0} {
+    add_node(make_shared<SandNode>());
 }
 
-SandPile::SandPile(int num_nodes) : size{1} {
-  for (int i=0; i < num_nodes - 1; ++i) {
+SandPile::SandPile(int num_nodes) : size{0} {
+  for (int i=0; i < num_nodes; ++i) {
     add_node(make_shared<SandNode>());
   }
 }
@@ -24,9 +25,12 @@ void SandPile::add_node(shared_ptr<SandNode> new_node) {
 }
 
 int SandPile::iterate() {
+  auto node_iter = nodes.begin();
+  ++node_iter;  // First node is the sink node; never iterates
+  // TODO: Add sources
   int avalanches = 0;
-  for (auto node_ : nodes) {
-    if (node_->iterate() && node_->get_rank()) {
+  for (auto end_iter = nodes.end(); node_iter != end_iter; ++node_iter) {
+    if ((*node_iter)->iterate() && (*node_iter)->get_rank()) {
       ++avalanches;
     }
   }

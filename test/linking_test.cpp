@@ -14,12 +14,11 @@ struct LinkingFixture {
   static constexpr int pile_size = 9;
   static constexpr int pile_width = 3;
   static constexpr int pile_height = pile_size/pile_width;
-  SandPile test_pile;
+  SandPile test_pile {pile_size};
   vector<shared_ptr<SandNode>> nodes;
   LinkingFixture() {
-    for (int i=0; i < pile_size - 1; ++i){
-      nodes.push_back(make_shared<SandNode>());
-      test_pile.add_node(nodes.back());
+    for (auto node_ : test_pile){
+      nodes.push_back(node_);
     }
   }
 };
