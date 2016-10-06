@@ -3,7 +3,7 @@ CXXFLAGS=-g -Wall -std=c++14
 INCFLAGS=-Iinclude
 VALFLAGS=--leak-check=full --undef-value-errors=no
 
-OBJS=node.o sand.o sandpile.o
+OBJS=node.o sand.o sandpile.o random_helper.o
 
 all: $(TEST_SRCS) $(OBJS)
 	$(CXX) $(CXXFLAGS) $(INCFLAGS) test/node_test.cpp $(OBJS) -lboost_unit_test_framework -o node_test
@@ -38,6 +38,9 @@ sand.o: src/sand.cpp
 
 sandpile.o: src/sandpile.cpp
 	$(CXX) $(CXXFLAGS) $(INCFLAGS) -c src/sandpile.cpp
+
+random_helper.o: src/random_helper.cpp
+	$(CXX) $(CXXFLAGS) $(INCFLAGS) -c src/random_helper.cpp
 
 clean:
 	rm *.o main *_test

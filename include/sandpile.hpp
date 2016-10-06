@@ -34,6 +34,11 @@ class SandPile {
      *
      * \return The number of nodes that "avalanched"
      */
+    int iterate_without_source();
+    /*! \brief Iterate sandpile dynamics without adding any grains
+     *
+     * \return The number of nodes that "avalanched"
+     */
     vector<shared_ptr<SandNode>>::const_iterator begin();
     /*! \brief Return iterator to first node in pile
      */
