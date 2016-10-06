@@ -25,9 +25,9 @@ struct LinkingFixture {
 
 BOOST_AUTO_TEST_SUITE(linking_suite)
 
-BOOST_AUTO_TEST_CASE(grid_connect_test) {
+BOOST_AUTO_TEST_CASE(periodic_grid_connect_test) {
   LinkingFixture link_fix;
-  grid_connect(link_fix.test_pile, link_fix.pile_width, link_fix.pile_height);
+  periodic_grid_connect(link_fix.test_pile, link_fix.pile_width, link_fix.pile_height);
   for (int i=0; i < link_fix.pile_height; ++i) {
     for (int j=0; j < link_fix.pile_width; ++j) {
       BOOST_CHECK(link_fix.nodes[

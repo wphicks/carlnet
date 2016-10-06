@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "sand.hpp"
 SandNode::SandNode() :
     CellNode(), value{0} {
@@ -24,4 +25,8 @@ bool SandNode::iterate() {
     return true;
   }
   return false;
+}
+
+void SandNode::set_max() {
+  value = std::max(0, get_rank() -1);
 }

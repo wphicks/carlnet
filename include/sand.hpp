@@ -23,6 +23,9 @@ class SandNode : public CellNode {
     bool iterate();
     /*! \brief Iterate sandpile dynamics for this node
      */
+    void set_max();
+    /*! \brief Set value to maximum without avalanching
+     */
  private:
     int value;
      /*! \brief The number of "grains" on this node

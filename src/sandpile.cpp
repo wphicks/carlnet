@@ -38,7 +38,7 @@ int SandPile::iterate_without_source() {
 }
 
 int SandPile::iterate() {
-  nodes[randint(size)]->increment_value();  // Add grain to rand node
+  nodes[randint(size - 1)]->increment_value();  // Add grain to rand node
   return iterate_without_source();
 }
 
@@ -48,4 +48,12 @@ vector<shared_ptr<SandNode>>::const_iterator SandPile::begin() {
 
 vector<shared_ptr<SandNode>>::const_iterator SandPile::end() {
   return nodes.cend();
+}
+
+void SandPile::set_max() {
+  auto node_iter = nodes.begin();
+  ++node_iter;  // First node is the sink node; skip
+  for (auto end_iter = nodes.end(); node_iter != end_iter; ++node_iter) {
+    (*node_iter)->set_max();
+  }
 }

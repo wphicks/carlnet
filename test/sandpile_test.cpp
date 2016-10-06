@@ -70,6 +70,23 @@ BOOST_AUTO_TEST_CASE(iterate_test) {
   BOOST_CHECK_EQUAL(test_pile.iterate(), 1);
 }
 
+BOOST_AUTO_TEST_CASE(set_max_test) {
+  SandPileFixture pile_fix;
+  SandPile test_pile {pile_fix.node_set};
+  shared_ptr<SandNode> test_node1{make_shared<SandNode>()};
+  shared_ptr<SandNode> test_node2{make_shared<SandNode>()};
+  for (auto node : pile_fix.node_set) {
+    test_node1->add_neighbor(node, true);
+    test_node2->add_neighbor(node, true);
+  }
+  test_pile.set_max();
+  auto node_iter = test_pile.begin();
+  ++node_iter;
+  for (auto end_iter = test_pile.end(); node_iter != end_iter; ++node_iter) {
+    BOOST_CHECK_EQUAL((*node_iter)->get_value(), 1);
+  }
+}
+
 BOOST_AUTO_TEST_SUITE_END()
 
 

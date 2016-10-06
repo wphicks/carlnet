@@ -64,6 +64,13 @@ BOOST_AUTO_TEST_CASE(iterate_test) {
   }
 }
 
+BOOST_AUTO_TEST_CASE(set_max_test) {
+  SandNodeFixture node_fix;
+  SandNode test_node {node_fix.node_set};
+  test_node.set_max();
+  BOOST_CHECK_EQUAL(test_node.get_value(), node_fix.node_set.size()-1);
+}
+
 BOOST_AUTO_TEST_SUITE_END()
 
 
