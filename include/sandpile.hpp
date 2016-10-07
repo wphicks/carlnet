@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "sand.hpp"
+#include "node.hpp"
 using std::make_shared;
 using std::vector;
 using std::iterator;
@@ -11,8 +12,8 @@ class SandPile {
  public:
     SandPile();
     template <template <typename...> class Iterable>
-    explicit SandPile(const Iterable<shared_ptr<SandNode>> &all_nodes) : size{0} {
-      add_node(make_shared<SandNode>());
+    explicit SandPile(const Iterable<shared_ptr<SandNode>> &all_nodes) :
+        SandPile{} {
       for (
           auto node_iter = all_nodes.begin();
           node_iter != all_nodes.end();
@@ -21,7 +22,7 @@ class SandPile {
       }
     }
     explicit SandPile(int num_nodes);
-    /*! \brief Create sandpile with given number of nodes (including sink node)
+    /*! \brief Create sandpile with given number of nodes (excluding sink node)
      */
     int get_size();
     /*! \brief Return the number of nodes in this sandpile
@@ -43,9 +44,16 @@ class SandPile {
     void set_max();
     /*! \brief Set all nodes to maximum stable value
      */
+    const shared_ptr<CellNode> get_sink();
+    /*! \brief Return pointer to sink node
+     */
 
  protected:
     vector<shared_ptr<SandNode>> nodes;
+    shared_ptr<CellNode> sink;
+    /*! \brief A node which will never avalanche
+     *
+     */
     int iterate_without_source();
     /*! \brief Iterate sandpile dynamics without adding any grains
      *

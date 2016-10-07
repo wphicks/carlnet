@@ -49,5 +49,5 @@ random_helper.o: src/random_helper.cpp
 	$(CXX) $(CXXFLAGS) $(INCFLAGS) -c src/random_helper.cpp
 
 clean:
-	rm *.o main *_test
+	rm *.o main *_test *_example
 

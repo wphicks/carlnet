@@ -9,7 +9,7 @@ int main() {
 
   // Create sandpile on grid
   SandPile my_pile {width*height};
-  grid_connect(my_pile, width, height);
+  sink_grid_connect(my_pile, width, height);
   my_pile.set_max();
 
   // Create file to store data

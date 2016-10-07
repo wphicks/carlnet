@@ -43,6 +43,14 @@ BOOST_AUTO_TEST_CASE(periodic_grid_connect_test) {
     }
   }
 }
+BOOST_AUTO_TEST_CASE(sink_grid_test) {
+  LinkingFixture link_fix;
+  sink_grid_connect(link_fix.test_pile, link_fix.pile_width, link_fix.pile_height);
+  BOOST_CHECK_EQUAL(
+    link_fix.test_pile.get_sink()->get_rank(),
+    2*link_fix.pile_width + 2*link_fix.pile_height - 4
+  );
+}
 BOOST_AUTO_TEST_SUITE_END()
 
 

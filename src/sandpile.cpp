@@ -2,15 +2,16 @@
 #include <vector>
 #include "sandpile.hpp"
 #include "random_helper.hpp"
+#include "node.hpp"
 
 using std::make_shared;
 using std::vector;
 
 SandPile::SandPile() : size{0} {
-    add_node(make_shared<SandNode>());
+  sink = make_shared<CellNode>();
 }
 
-SandPile::SandPile(int num_nodes) : size{0} {
+SandPile::SandPile(int num_nodes) : SandPile{} {
   for (int i=0; i < num_nodes; ++i) {
     add_node(make_shared<SandNode>());
   }
@@ -26,11 +27,9 @@ void SandPile::add_node(shared_ptr<SandNode> new_node) {
 }
 
 int SandPile::iterate_without_source() {
-  auto node_iter = nodes.begin();
-  ++node_iter;  // First node is the sink node; never iterates
   int avalanches = 0;
-  for (auto end_iter = nodes.end(); node_iter != end_iter; ++node_iter) {
-    if ((*node_iter)->iterate() && (*node_iter)->get_rank()) {
+  for (auto node_ : nodes) {
+    if (node_->iterate() && node_->get_rank()) {
       ++avalanches;
     }
   }
@@ -38,7 +37,7 @@ int SandPile::iterate_without_source() {
 }
 
 int SandPile::iterate() {
-  nodes[randint(size - 1)]->increment_value();  // Add grain to rand node
+  nodes[randint(size-1)]->increment_value();  // Add grain to rand node
   return iterate_without_source();
 }
 
@@ -51,9 +50,11 @@ vector<shared_ptr<SandNode>>::const_iterator SandPile::end() {
 }
 
 void SandPile::set_max() {
-  auto node_iter = nodes.begin();
-  ++node_iter;  // First node is the sink node; skip
-  for (auto end_iter = nodes.end(); node_iter != end_iter; ++node_iter) {
-    (*node_iter)->set_max();
+  for (auto node_ : nodes) {
+    node_->set_max();
   }
+}
+
+const shared_ptr<CellNode> SandPile::get_sink() {
+  return sink;
 }
