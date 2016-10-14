@@ -18,15 +18,18 @@ configure_file (
 include_directories("include" "${PROJECT_BINARY_DIR}")
 file(GLOB SOURCES "src/*.cpp")
 
-option(BUILD_TESTS "Build test executables" ON)
-option(BUILD_EXAMPLES "Build example executables" ON)
+option(BUILD_TESTS "Build test executables" OFF)
+option(BUILD_EXAMPLES "Build example executables" OFF)
 
+add_library(carlnet STATIC ${SOURCES})
 
 if (BUILD_TESTS)
   add_subdirectory("test")
+  target_link_libraries(carlnet test)
 endif (BUILD_TESTS)
 
 if (BUILD_EXAMPLES)
   add_subdirectory("examples")
+  target_link_libraries(carlnet examples)
 endif (BUILD_EXAMPLES)
 
