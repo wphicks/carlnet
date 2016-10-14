@@ -11,13 +11,13 @@ using std::logic_error;
 using std::static_pointer_cast;
 using std::enable_shared_from_this;
 
-class CellNode : public enable_shared_from_this<CellNode> {
-    /*! \brief A node in a directed graph of automata
+class Node : public enable_shared_from_this<Node> {
+    /*! \brief A node in a directed graph of agents
      */
  public:
-    CellNode();
+    Node();
     template <template <typename...> class Iterable>
-    explicit CellNode(const Iterable<shared_ptr<CellNode>> &all_neighbors) {
+    explicit Node(const Iterable<shared_ptr<Node>> &all_neighbors) {
       for (
           auto neighbor_iter = all_neighbors.begin();
           neighbor_iter != all_neighbors.end();
@@ -25,41 +25,41 @@ class CellNode : public enable_shared_from_this<CellNode> {
         add_neighbor(*neighbor_iter);
       }
     }
-    virtual ~CellNode();
+    virtual ~Node();
     int get_rank();
     /*! \brief Return the number of neighbors for this node
      */
-    void add_neighbor(shared_ptr<CellNode> new_neighbor, bool mutual);
+    void add_neighbor(shared_ptr<Node> new_neighbor, bool mutual);
     /*! \brief Add neighbor to node
      *
      * \param new_neighbor: the neighbor to add
      * \param mutual: also make this node a neighbor of the added node
      */
-    void add_neighbor(shared_ptr<CellNode> new_neighbor);
+    void add_neighbor(shared_ptr<Node> new_neighbor);
     template <class NodeType>
     void add_neighbor(shared_ptr<NodeType> new_neighbor) {
     /*! \brief Add neighbor to node
      *
-     * \throw If the provided pointer cannot be cast to a shared_ptr<CellNode>,
+     * \throw If the provided pointer cannot be cast to a shared_ptr<Node>,
      * this method will throw a logic_error.
      */
-      shared_ptr<CellNode> cell_neighbor =
-        static_pointer_cast<CellNode>(new_neighbor);
+      shared_ptr<Node> cell_neighbor =
+        static_pointer_cast<Node>(new_neighbor);
       if (cell_neighbor) {
         add_neighbor(cell_neighbor);
       } else {
-        throw logic_error("New neighbor could not be cast to shared_ptr<CellNode>");
+        throw logic_error("New neighbor could not be cast to shared_ptr<Node>");
       }
     }
-    void remove_neighbor(shared_ptr<CellNode> old_neighbor, bool mutual);
+    void remove_neighbor(shared_ptr<Node> old_neighbor, bool mutual);
     /*! \brief Remove neighbor from node
      *
      * \param old_neighbor: the neighbor to remove
      * \param mutual: also remove this node as a neighbor of the added node (if
      * it is currently a neighbor)
      */
-    void remove_neighbor(shared_ptr<CellNode> old_neighbor);
-    bool has_neighbor(shared_ptr<CellNode> test_neighbor);
+    void remove_neighbor(shared_ptr<Node> old_neighbor);
+    bool has_neighbor(shared_ptr<Node> test_neighbor);
     /*! \brief Check to see if given node is a neighbor
      */
     virtual int get_value();
@@ -77,7 +77,7 @@ class CellNode : public enable_shared_from_this<CellNode> {
      */
 
  protected:
-    vector<weak_ptr<CellNode>> neighbors;
+    vector<weak_ptr<Node>> neighbors;
     /*! \brief A list of pointers to the neighbors of this node
      */
 

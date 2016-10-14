@@ -43,6 +43,8 @@ BOOST_AUTO_TEST_CASE(periodic_grid_connect_test) {
     }
   }
 }
+
+// TODO: This test is insufficient
 BOOST_AUTO_TEST_CASE(sink_grid_test) {
   LinkingFixture link_fix;
   sink_grid_connect(link_fix.test_pile, link_fix.pile_width, link_fix.pile_height);

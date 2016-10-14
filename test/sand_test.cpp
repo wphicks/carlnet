@@ -10,11 +10,11 @@ using std::shared_ptr;
 using std::make_shared;
 
 struct SandNodeFixture {
-  shared_ptr<CellNode> node0 = make_shared<SandNode>();
-  shared_ptr<CellNode> node1 = make_shared<SandNode>();
-  shared_ptr<CellNode> node2 = make_shared<SandNode>();
-  shared_ptr<CellNode> node3 = make_shared<SandNode>();
-  set<shared_ptr<CellNode>> node_set;
+  shared_ptr<Node> node0 = make_shared<SandNode>();
+  shared_ptr<Node> node1 = make_shared<SandNode>();
+  shared_ptr<Node> node2 = make_shared<SandNode>();
+  shared_ptr<Node> node3 = make_shared<SandNode>();
+  set<shared_ptr<Node>> node_set;
   SandNodeFixture() {
     node_set.insert(node0);
     node_set.insert(node1);

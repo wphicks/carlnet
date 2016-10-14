@@ -4,14 +4,14 @@
 #include "node.hpp"
 using std::shared_ptr;
 
-class SandNode : public CellNode {
+class SandNode : public Node {
   /*! \brief A node in a sandpile model
    */
  public:
     SandNode();
     template <template <typename...> class Iterable>
-    explicit SandNode(const Iterable<shared_ptr<CellNode>> &all_neighbors) :
-        CellNode(all_neighbors) {
+    explicit SandNode(const Iterable<shared_ptr<Node>> &all_neighbors) :
+        Node(all_neighbors) {
     }
     ~SandNode();
     int get_value();

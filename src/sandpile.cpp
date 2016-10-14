@@ -8,7 +8,7 @@ using std::make_shared;
 using std::vector;
 
 SandPile::SandPile() : size{0} {
-  sink = make_shared<CellNode>();
+  sink = make_shared<Node>();
 }
 
 SandPile::SandPile(int num_nodes) : SandPile{} {
@@ -55,6 +55,6 @@ void SandPile::set_max() {
   }
 }
 
-const shared_ptr<CellNode> SandPile::get_sink() {
+const shared_ptr<Node> SandPile::get_sink() {
   return sink;
 }

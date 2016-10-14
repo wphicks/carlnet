@@ -44,13 +44,13 @@ class SandPile {
     void set_max();
     /*! \brief Set all nodes to maximum stable value
      */
-    const shared_ptr<CellNode> get_sink();
+    const shared_ptr<Node> get_sink();
     /*! \brief Return pointer to sink node
      */
 
  protected:
     vector<shared_ptr<SandNode>> nodes;
-    shared_ptr<CellNode> sink;
+    shared_ptr<Node> sink;
     /*! \brief A node which will never avalanche
      *
      */

@@ -1,7 +1,7 @@
 #include <algorithm>
 #include "sand.hpp"
 SandNode::SandNode() :
-    CellNode(), value{0} {
+    Node(), value{0} {
 }
 
 SandNode::~SandNode() {
