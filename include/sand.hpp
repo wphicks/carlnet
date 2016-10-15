@@ -9,9 +9,9 @@ class SandNode : public Node {
    */
  public:
     SandNode();
-    template <template <typename...> class Iterable>
-    explicit SandNode(const Iterable<shared_ptr<Node>> &all_neighbors) :
-        Node(all_neighbors) {
+    template <typename Iterator>
+    SandNode(Iterator first, Iterator end) :
+        Node{first, end} {
     }
     ~SandNode();
     int get_value();

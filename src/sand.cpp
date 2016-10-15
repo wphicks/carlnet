@@ -1,5 +1,9 @@
 #include <algorithm>
+#include <memory>
 #include "sand.hpp"
+
+using std::static_pointer_cast;
+
 SandNode::SandNode() :
     Node(), value{0} {
 }
@@ -20,7 +24,9 @@ bool SandNode::iterate() {
   if (get_rank() <= get_value()) {
     value -= get_rank();
     for (auto node : neighbors) {
-      node.lock()->increment_value();
+      shared_ptr<SandNode> valued_node = static_pointer_cast<SandNode>(
+        node.lock());
+      valued_node->increment_value();
     }
     return true;
   }

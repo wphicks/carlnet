@@ -16,11 +16,16 @@ class Node : public enable_shared_from_this<Node> {
      */
  public:
     Node();
-    template <template <typename...> class Iterable>
-    explicit Node(const Iterable<shared_ptr<Node>> &all_neighbors) {
+    template <typename Iterator>
+    Node(Iterator first, Iterator end) {
+      /*! \brief Construct node from iterable of shared_ptrs
+       *
+       * \param first: Iterator to first shared_ptr in container
+       * \param end: Iterator to end of container
+       */
       for (
-          auto neighbor_iter = all_neighbors.begin();
-          neighbor_iter != all_neighbors.end();
+          auto neighbor_iter = first;
+          neighbor_iter != end;
           ++neighbor_iter) {
         add_neighbor(*neighbor_iter);
       }
@@ -61,14 +66,6 @@ class Node : public enable_shared_from_this<Node> {
     void remove_neighbor(shared_ptr<Node> old_neighbor);
     bool has_neighbor(shared_ptr<Node> test_neighbor);
     /*! \brief Check to see if given node is a neighbor
-     */
-    virtual int get_value();
-    /*! \brief Return value associated with this node
-     */
-    virtual bool increment_value();
-    /*! \brief Increment value associated with this node
-     *
-     * \return bool indicating whether value was successfully incremented
      */
     virtual bool iterate();
     /*! \brief Perform the next iteration of the cell's lifecycle

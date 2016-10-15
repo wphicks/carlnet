@@ -67,11 +67,3 @@ bool Node::has_neighbor(shared_ptr<Node> test_neighbor) {
 bool Node::iterate() {
   return false;
 }
-
-int Node::get_value() {
-  return 0;
-}
-
-bool Node::increment_value() {
-  return false;
-}

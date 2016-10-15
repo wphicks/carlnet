@@ -32,20 +32,20 @@ sandpile_test: $(OBJS) test/sandpile_test.cpp
 	$(CXX) $(CXXFLAGS) $(INCFLAGS) test/sandpile_test.cpp $(OBJS) -lboost_unit_test_framework -o sandpile_test
 	./sandpile_test
 
-linking_test: $(OBJS) test/linking_test.cpp
+linking_test: $(OBJS) test/linking_test.cpp include/linking.hpp
 	$(CXX) $(CXXFLAGS) $(INCFLAGS) test/linking_test.cpp $(OBJS) -lboost_unit_test_framework -o linking_test
 	./linking_test
 
-node.o: src/node.cpp
+node.o: src/node.cpp include/node.hpp
 	$(CXX) $(CXXFLAGS) $(INCFLAGS) -c src/node.cpp
 
-sand.o: src/sand.cpp
+sand.o: src/sand.cpp include/sand.hpp
 	$(CXX) $(CXXFLAGS) $(INCFLAGS) -c src/sand.cpp
 
-sandpile.o: src/sandpile.cpp
+sandpile.o: src/sandpile.cpp include/sandpile.hpp
 	$(CXX) $(CXXFLAGS) $(INCFLAGS) -c src/sandpile.cpp
 
-random_helper.o: src/random_helper.cpp
+random_helper.o: src/random_helper.cpp include/random_helper.hpp
 	$(CXX) $(CXXFLAGS) $(INCFLAGS) -c src/random_helper.cpp
 
 clean:

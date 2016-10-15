@@ -11,12 +11,12 @@ using std::iterator;
 class SandPile {
  public:
     SandPile();
-    template <template <typename...> class Iterable>
-    explicit SandPile(const Iterable<shared_ptr<SandNode>> &all_nodes) :
+    template <typename Iterator>
+    SandPile(Iterator first, Iterator end) :
         SandPile{} {
       for (
-          auto node_iter = all_nodes.begin();
-          node_iter != all_nodes.end();
+          auto node_iter = first;
+          node_iter != end;
           ++node_iter) {
         add_node(*node_iter);
       }

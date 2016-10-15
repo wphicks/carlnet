@@ -10,11 +10,11 @@ using std::shared_ptr;
 using std::make_shared;
 
 struct SandNodeFixture {
-  shared_ptr<Node> node0 = make_shared<SandNode>();
-  shared_ptr<Node> node1 = make_shared<SandNode>();
-  shared_ptr<Node> node2 = make_shared<SandNode>();
-  shared_ptr<Node> node3 = make_shared<SandNode>();
-  set<shared_ptr<Node>> node_set;
+  shared_ptr<SandNode> node0 = make_shared<SandNode>();
+  shared_ptr<SandNode> node1 = make_shared<SandNode>();
+  shared_ptr<SandNode> node2 = make_shared<SandNode>();
+  shared_ptr<SandNode> node3 = make_shared<SandNode>();
+  set<shared_ptr<SandNode>> node_set;
   SandNodeFixture() {
     node_set.insert(node0);
     node_set.insert(node1);
@@ -33,7 +33,7 @@ BOOST_AUTO_TEST_CASE(default_constructor_test) {
 
 BOOST_AUTO_TEST_CASE(add_grain_test) {
   SandNodeFixture node_fix;
-  SandNode test_node {node_fix.node_set};
+  SandNode test_node {node_fix.node_set.begin(), node_fix.node_set.end()};
   BOOST_CHECK_EQUAL(test_node.get_value(), 0);
   test_node.increment_value();
   BOOST_CHECK_EQUAL(test_node.get_value(), 1);
@@ -41,7 +41,7 @@ BOOST_AUTO_TEST_CASE(add_grain_test) {
 
 BOOST_AUTO_TEST_CASE(add_neighbor_test) {
   SandNodeFixture node_fix;
-  SandNode test_node {node_fix.node_set};
+  SandNode test_node {node_fix.node_set.begin(), node_fix.node_set.end()};
   BOOST_CHECK(!test_node.has_neighbor(node_fix.node3));
   test_node.add_neighbor(node_fix.node3);
   BOOST_CHECK(test_node.has_neighbor(node_fix.node3));
@@ -49,7 +49,7 @@ BOOST_AUTO_TEST_CASE(add_neighbor_test) {
 
 BOOST_AUTO_TEST_CASE(iterate_test) {
   SandNodeFixture node_fix;
-  SandNode test_node {node_fix.node_set};
+  SandNode test_node {node_fix.node_set.begin(), node_fix.node_set.end()};
   BOOST_CHECK(!test_node.iterate());
   for (int i=0; i < node_fix.node_set.size(); ++i) {
     test_node.increment_value();
@@ -66,7 +66,7 @@ BOOST_AUTO_TEST_CASE(iterate_test) {
 
 BOOST_AUTO_TEST_CASE(set_max_test) {
   SandNodeFixture node_fix;
-  SandNode test_node {node_fix.node_set};
+  SandNode test_node {node_fix.node_set.begin(), node_fix.node_set.end()};
   test_node.set_max();
   BOOST_CHECK_EQUAL(test_node.get_value(), node_fix.node_set.size()-1);
 }
