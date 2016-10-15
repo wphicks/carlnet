@@ -1,24 +1,24 @@
-#ifndef INCLUDE_SAND_HPP_
-#define INCLUDE_SAND_HPP_
+#ifndef INCLUDE_VALUE_NODE_HPP_
+#define INCLUDE_VALUE_NODE_HPP_
 #include<memory>
 #include "node.hpp"
 using std::shared_ptr;
 
-class SandNode : public Node {
+class ValueNode : public Node {
   /*! \brief A node in a sandpile model
    */
  public:
-    SandNode();
+    ValueNode();
     template <typename Iterator>
-    SandNode(Iterator first, Iterator end) :
+    ValueNode(Iterator first, Iterator end) :
         Node{first, end} {
     }
-    ~SandNode();
+    ~ValueNode();
     int get_value();
-    /*! \brief Return number of grains on this node
+    /*! \brief Return value assigned to this node
      */
     bool increment_value();
-    /*! \brief Add a grain to this node
+    /*! \brief Increase value of this node by one
      */
     bool iterate();
     /*! \brief Iterate sandpile dynamics for this node
@@ -31,4 +31,4 @@ class SandNode : public Node {
      /*! \brief The number of "grains" on this node
       */
 };
-#endif  // INCLUDE_SAND_HPP_
+#endif  // INCLUDE_VALUE_NODE_HPP_

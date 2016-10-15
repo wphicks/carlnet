@@ -13,7 +13,7 @@ SandPile::SandPile() : size{0} {
 
 SandPile::SandPile(int num_nodes) : SandPile{} {
   for (int i=0; i < num_nodes; ++i) {
-    add_node(make_shared<SandNode>());
+    add_node(make_shared<ValueNode>());
   }
 }
 
@@ -21,7 +21,7 @@ int SandPile::get_size() {
   return size;
 }
 
-void SandPile::add_node(shared_ptr<SandNode> new_node) {
+void SandPile::add_node(shared_ptr<ValueNode> new_node) {
   nodes.push_back(new_node);
   ++size;
 }
@@ -41,11 +41,11 @@ int SandPile::iterate() {
   return iterate_without_source();
 }
 
-vector<shared_ptr<SandNode>>::const_iterator SandPile::begin() {
+vector<shared_ptr<ValueNode>>::const_iterator SandPile::begin() {
   return nodes.cbegin();
 }
 
-vector<shared_ptr<SandNode>>::const_iterator SandPile::end() {
+vector<shared_ptr<ValueNode>>::const_iterator SandPile::end() {
   return nodes.cend();
 }
 

@@ -1,30 +1,30 @@
 #include <algorithm>
 #include <memory>
-#include "sand.hpp"
+#include "value_node.hpp"
 
 using std::static_pointer_cast;
 
-SandNode::SandNode() :
+ValueNode::ValueNode() :
     Node(), value{0} {
 }
 
-SandNode::~SandNode() {
+ValueNode::~ValueNode() {
 }
 
-int SandNode::get_value() {
+int ValueNode::get_value() {
   return value;
 }
 
-bool SandNode::increment_value() {
+bool ValueNode::increment_value() {
   ++value;
   return true;
 }
 
-bool SandNode::iterate() {
+bool ValueNode::iterate() {
   if (get_rank() <= get_value()) {
     value -= get_rank();
     for (auto node : neighbors) {
-      shared_ptr<SandNode> valued_node = static_pointer_cast<SandNode>(
+      shared_ptr<ValueNode> valued_node = static_pointer_cast<ValueNode>(
         node.lock());
       valued_node->increment_value();
     }
@@ -33,6 +33,6 @@ bool SandNode::iterate() {
   return false;
 }
 
-void SandNode::set_max() {
+void ValueNode::set_max() {
   value = std::max(0, get_rank() -1);
 }

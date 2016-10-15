@@ -3,18 +3,18 @@
 #include <set>
 #include <memory>
 #include <boost/test/included/unit_test.hpp>
-#include "sand.hpp"
+#include "value_node.hpp"
 #include "sandpile.hpp"
 
 using std::set;
 using std::make_shared;
 
 struct SandPileFixture {
-  shared_ptr<SandNode> node0 = make_shared<SandNode>();
-  shared_ptr<SandNode> node1 = make_shared<SandNode>();
-  shared_ptr<SandNode> node2 = make_shared<SandNode>();
-  shared_ptr<SandNode> node3 = make_shared<SandNode>();
-  set<shared_ptr<SandNode>> node_set;
+  shared_ptr<ValueNode> node0 = make_shared<ValueNode>();
+  shared_ptr<ValueNode> node1 = make_shared<ValueNode>();
+  shared_ptr<ValueNode> node2 = make_shared<ValueNode>();
+  shared_ptr<ValueNode> node3 = make_shared<ValueNode>();
+  set<shared_ptr<ValueNode>> node_set;
   SandPileFixture() {
     node_set.insert(node0);
     node_set.insert(node1);
@@ -56,7 +56,7 @@ BOOST_AUTO_TEST_CASE(iterate_nodes_test) {
 BOOST_AUTO_TEST_CASE(iterate_test) {
   SandPileFixture pile_fix;
   SandPile test_pile {pile_fix.node_set.begin(), pile_fix.node_set.end()};
-  shared_ptr<SandNode> test_node{make_shared<SandNode>()};
+  shared_ptr<ValueNode> test_node{make_shared<ValueNode>()};
   for (auto node : pile_fix.node_set) {
     test_node->add_neighbor(node);
   }
@@ -73,8 +73,8 @@ BOOST_AUTO_TEST_CASE(iterate_test) {
 BOOST_AUTO_TEST_CASE(set_max_test) {
   SandPileFixture pile_fix;
   SandPile test_pile {pile_fix.node_set.begin(), pile_fix.node_set.end()};
-  shared_ptr<SandNode> test_node1{make_shared<SandNode>()};
-  shared_ptr<SandNode> test_node2{make_shared<SandNode>()};
+  shared_ptr<ValueNode> test_node1{make_shared<ValueNode>()};
+  shared_ptr<ValueNode> test_node2{make_shared<ValueNode>()};
   for (auto node : pile_fix.node_set) {
     test_node1->add_neighbor(node, true);
     test_node2->add_neighbor(node, true);
