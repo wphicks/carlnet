@@ -17,18 +17,9 @@ class ValueNode : public Node {
     int get_value();
     /*! \brief Return value assigned to this node
      */
-    bool increment_value();
-    /*! \brief Increase value of this node by one
-     */
-    bool iterate();
-    /*! \brief Iterate sandpile dynamics for this node
-     */
-    void set_max();
-    /*! \brief Set value to maximum without avalanching
-     */
- private:
+ protected:
     int value;
-     /*! \brief The number of "grains" on this node
+     /*! \brief The value assigned to this node
       */
 };
 #endif  // INCLUDE_VALUE_NODE_HPP_

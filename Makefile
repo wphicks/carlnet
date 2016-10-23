@@ -3,7 +3,7 @@ CXXFLAGS=-g -Wall -std=c++14
 INCFLAGS=-Iinclude
 VALFLAGS=--leak-check=full --undef-value-errors=no
 
-OBJS=node.o value_node.o sandpile.o random_helper.o
+OBJS=node.o value_node.o sandpile.o random_helper.o sand_node.o
 EXAMPLE_SRCS=examples/sandpile_example.cpp
 
 all: all_tests all_examples
@@ -41,6 +41,9 @@ node.o: src/node.cpp include/node.hpp
 
 value_node.o: src/value_node.cpp include/value_node.hpp
 	$(CXX) $(CXXFLAGS) $(INCFLAGS) -c src/value_node.cpp
+
+sand_node.o: src/sand_node.cpp include/sand_node.hpp
+	$(CXX) $(CXXFLAGS) $(INCFLAGS) -c src/sand_node.cpp
 
 sandpile.o: src/sandpile.cpp include/sandpile.hpp
 	$(CXX) $(CXXFLAGS) $(INCFLAGS) -c src/sandpile.cpp

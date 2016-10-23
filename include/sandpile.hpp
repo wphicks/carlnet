@@ -2,7 +2,7 @@
 #define INCLUDE_SANDPILE_HPP_
 
 #include <vector>
-#include "value_node.hpp"
+#include "sand_node.hpp"
 #include "node.hpp"
 using std::make_shared;
 using std::vector;
@@ -27,7 +27,7 @@ class SandPile {
     int get_size();
     /*! \brief Return the number of nodes in this sandpile
      */
-    void add_node(shared_ptr<ValueNode> new_node);
+    void add_node(shared_ptr<SandNode> new_node);
     /*! \brief Add node to sandpile model
      */
     int iterate();
@@ -35,10 +35,10 @@ class SandPile {
      *
      * \return The number of nodes that "avalanched"
      */
-    vector<shared_ptr<ValueNode>>::const_iterator begin();
+    vector<shared_ptr<SandNode>>::const_iterator begin();
     /*! \brief Return iterator to first node in pile
      */
-    vector<shared_ptr<ValueNode>>::const_iterator end();
+    vector<shared_ptr<SandNode>>::const_iterator end();
     /*! \brief Return iterator to end of pile
      */
     void set_max();
@@ -49,7 +49,7 @@ class SandPile {
      */
 
  protected:
-    vector<shared_ptr<ValueNode>> nodes;
+    vector<shared_ptr<SandNode>> nodes;
     shared_ptr<Node> sink;
     /*! \brief A node which will never avalanche
      *

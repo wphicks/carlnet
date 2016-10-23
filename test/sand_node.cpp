@@ -11,16 +11,16 @@ struct SandNodeFixture {
 BOOST_AUTO_TEST_SUITE(sand_node_test)
 
 BOOST_AUTO_TEST_CASE(increment_value_test) {
-  ValueNodeFixture node_fix;
-  ValueNode test_node {node_fix.node_set.begin(), node_fix.node_set.end()};
+  SandNodeFixture node_fix;
+  SandNode test_node {node_fix.node_set.begin(), node_fix.node_set.end()};
   BOOST_CHECK_EQUAL(test_node.get_value(), 0);
   test_node.increment_value();
   BOOST_CHECK_EQUAL(test_node.get_value(), 1);
 }
 
 BOOST_AUTO_TEST_CASE(iterate_test) {
-  ValueNodeFixture node_fix;
-  ValueNode test_node {node_fix.node_set.begin(), node_fix.node_set.end()};
+  SandNodeFixture node_fix;
+  SandNode test_node {node_fix.node_set.begin(), node_fix.node_set.end()};
   BOOST_CHECK(!test_node.iterate());
   for (int i=0; i < node_fix.node_set.size(); ++i) {
     test_node.increment_value();
@@ -36,8 +36,8 @@ BOOST_AUTO_TEST_CASE(iterate_test) {
 }
 
 BOOST_AUTO_TEST_CASE(set_max_test) {
-  ValueNodeFixture node_fix;
-  ValueNode test_node {node_fix.node_set.begin(), node_fix.node_set.end()};
+  SandNodeFixture node_fix;
+  SandNode test_node {node_fix.node_set.begin(), node_fix.node_set.end()};
   test_node.set_max();
   BOOST_CHECK_EQUAL(test_node.get_value(), node_fix.node_set.size()-1);
 }
