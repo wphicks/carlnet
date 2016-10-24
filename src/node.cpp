@@ -29,10 +29,6 @@ void Node::add_neighbor(shared_ptr<Node> new_neighbor, bool mutual) {
   }
 }
 
-void Node::add_neighbor(shared_ptr<Node> new_neighbor) {
-  return add_neighbor(new_neighbor, false);
-}
-
 void Node::remove_neighbor(shared_ptr<Node> old_neighbor, bool mutual) {
   auto location = find_if(
       neighbors.begin(), neighbors.end(),
@@ -49,10 +45,6 @@ void Node::remove_neighbor(shared_ptr<Node> old_neighbor, bool mutual) {
       old_neighbor->remove_neighbor(shared_from_this());
     }
   }
-}
-
-void Node::remove_neighbor(shared_ptr<Node> old_neighbor) {
-  return remove_neighbor(old_neighbor, false);
 }
 
 bool Node::has_neighbor(shared_ptr<Node> test_neighbor) {

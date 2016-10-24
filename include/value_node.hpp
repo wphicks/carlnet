@@ -11,7 +11,7 @@ class ValueNode : public Node {
     ValueNode();
     template <typename Iterator>
     ValueNode(Iterator first, Iterator end) :
-        Node{first, end} {
+        Node{first, end}, value{0} {
     }
     ~ValueNode();
     int get_value();

@@ -18,22 +18,26 @@ memory: tests
 	valgrind $(VALFLAGS) ./value_node_test
 	valgrind $(VALFLAGS) ./sandpile_test
 
-all_tests: node_test value_node_test sandpile_test linking_test
+all_tests: node_test value_node_test sand_node_test sandpile_test linking_test
 
-node_test: $(OBJS) test/node_test.cpp
-	$(CXX) $(CXXFLAGS) $(INCFLAGS) test/node_test.cpp $(OBJS) -lboost_unit_test_framework -o node_test
+node_test: node.o test/node_test.cpp
+	$(CXX) $(CXXFLAGS) $(INCFLAGS) test/node_test.cpp node.o -lboost_unit_test_framework -o node_test
 	./node_test
 
-value_node_test: $(OBJS) test/value_node_test.cpp
-	$(CXX) $(CXXFLAGS) $(INCFLAGS) test/value_node_test.cpp $(OBJS) -lboost_unit_test_framework -o value_node_test
+value_node_test: node_test value_node.o test/value_node_test.cpp
+	$(CXX) $(CXXFLAGS) $(INCFLAGS) test/value_node_test.cpp node.o value_node.o -lboost_unit_test_framework -o value_node_test
 	./value_node_test
 
-sandpile_test: $(OBJS) test/sandpile_test.cpp
-	$(CXX) $(CXXFLAGS) $(INCFLAGS) test/sandpile_test.cpp $(OBJS) -lboost_unit_test_framework -o sandpile_test
+sand_node_test: value_node_test sand_node.o test/sand_node_test.cpp
+	$(CXX) $(CXXFLAGS) $(INCFLAGS) test/sand_node_test.cpp node.o value_node.o sand_node.o -lboost_unit_test_framework -o sand_node_test
+	./sand_node_test
+
+sandpile_test: sand_node_test sandpile.o test/sandpile_test.cpp
+	$(CXX) $(CXXFLAGS) $(INCFLAGS) test/sandpile_test.cpp node.o value_node.o sand_node.o sandpile.o -lboost_unit_test_framework -o sandpile_test
 	./sandpile_test
 
-linking_test: $(OBJS) test/linking_test.cpp include/linking.hpp
-	$(CXX) $(CXXFLAGS) $(INCFLAGS) test/linking_test.cpp $(OBJS) -lboost_unit_test_framework -o linking_test
+linking_test: sandpile_test test/linking_test.cpp include/linking.hpp
+	$(CXX) $(CXXFLAGS) $(INCFLAGS) test/linking_test.cpp node.o value_node.o sand_node.o sandpile.o -lboost_unit_test_framework -o linking_test
 	./linking_test
 
 node.o: src/node.cpp include/node.hpp
@@ -42,7 +46,7 @@ node.o: src/node.cpp include/node.hpp
 value_node.o: src/value_node.cpp include/value_node.hpp
 	$(CXX) $(CXXFLAGS) $(INCFLAGS) -c src/value_node.cpp
 
-sand_node.o: src/sand_node.cpp include/sand_node.hpp
+sand_node.o: src/sand_node.cpp include/sand_node.hpp value_node.o
 	$(CXX) $(CXXFLAGS) $(INCFLAGS) -c src/sand_node.cpp
 
 sandpile.o: src/sandpile.cpp include/sandpile.hpp

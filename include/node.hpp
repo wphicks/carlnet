@@ -17,7 +17,7 @@ class Node : public enable_shared_from_this<Node> {
  public:
     Node();
     template <typename Iterator>
-    Node(Iterator first, Iterator end) {
+    Node(const Iterator first, const Iterator end) : Node{} {
       /*! \brief Construct node from iterable of shared_ptrs
        *
        * \param first: Iterator to first shared_ptr in container
@@ -35,38 +35,48 @@ class Node : public enable_shared_from_this<Node> {
     /*! \brief Return the number of neighbors for this node
      */
     void add_neighbor(shared_ptr<Node> new_neighbor, bool mutual);
+    template <class NodeType>
+    void add_neighbor(shared_ptr<NodeType> new_neighbor, bool mutual) {
     /*! \brief Add neighbor to node
      *
      * \param new_neighbor: the neighbor to add
      * \param mutual: also make this node a neighbor of the added node
      */
-    void add_neighbor(shared_ptr<Node> new_neighbor);
+      shared_ptr<Node> cell_neighbor = shared_ptr<Node>(new_neighbor);
+      add_neighbor(cell_neighbor, mutual);
+    }
     template <class NodeType>
     void add_neighbor(shared_ptr<NodeType> new_neighbor) {
     /*! \brief Add neighbor to node
      *
-     * \throw If the provided pointer cannot be cast to a shared_ptr<Node>,
-     * this method will throw a logic_error.
      */
-      shared_ptr<Node> cell_neighbor =
-        static_pointer_cast<Node>(new_neighbor);
-      if (cell_neighbor) {
-        add_neighbor(cell_neighbor);
-      } else {
-        throw logic_error("New neighbor could not be cast to shared_ptr<Node>");
-      }
+      add_neighbor(new_neighbor, false);
     }
+    // TODO: Add generic templated version of this and has_neighbor
     void remove_neighbor(shared_ptr<Node> old_neighbor, bool mutual);
+    template <class NodeType>
     /*! \brief Remove neighbor from node
      *
      * \param old_neighbor: the neighbor to remove
      * \param mutual: also remove this node as a neighbor of the added node (if
      * it is currently a neighbor)
      */
-    void remove_neighbor(shared_ptr<Node> old_neighbor);
+    void remove_neighbor(shared_ptr<NodeType> old_neighbor, bool mutual) {
+      shared_ptr<Node> cell_neighbor = shared_ptr<Node>(old_neighbor);
+      remove_neighbor(cell_neighbor, mutual);
+    }
+    template <class NodeType>
+    void remove_neighbor(shared_ptr<NodeType> old_neighbor) {
+      remove_neighbor(old_neighbor, false);
+    }
     bool has_neighbor(shared_ptr<Node> test_neighbor);
+    template <class NodeType>
+    bool has_neighbor(shared_ptr<NodeType> test_neighbor) {
     /*! \brief Check to see if given node is a neighbor
      */
+      shared_ptr<Node> cell_neighbor = shared_ptr<Node>(test_neighbor);
+      return has_neighbor(cell_neighbor);
+    }
     virtual bool iterate();
     /*! \brief Perform the next iteration of the cell's lifecycle
      *

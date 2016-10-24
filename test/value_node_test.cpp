@@ -31,6 +31,13 @@ BOOST_AUTO_TEST_CASE(default_constructor_test) {
   BOOST_CHECK_EQUAL(test_node.get_value(), 0);
 }
 
+BOOST_AUTO_TEST_CASE(iterator_constructor_test) {
+  ValueNodeFixture node_fix;
+  ValueNode test_node {node_fix.node_set.begin(), node_fix.node_set.end()};
+  BOOST_CHECK_EQUAL(test_node.get_rank(), node_fix.node_set.size());
+  BOOST_CHECK(test_node.has_neighbor(node_fix.node0));
+}
+
 BOOST_AUTO_TEST_CASE(add_neighbor_test) {
   ValueNodeFixture node_fix;
   ValueNode test_node {node_fix.node_set.begin(), node_fix.node_set.end()};

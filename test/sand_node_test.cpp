@@ -1,7 +1,11 @@
 #define BOOST_TEST_DYN_LINK
 #define BOOST_TEST_MODULE sand_node_test
+#include <vector>
+#include <boost/test/included/unit_test.hpp>
+#include "sand_node.hpp"
 
 struct SandNodeFixture {
+  vector<shared_ptr<SandNode>> node_set{4};
   SandNodeFixture() {
   }
   ~SandNodeFixture() {
