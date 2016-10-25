@@ -32,12 +32,12 @@ sand_node_test: value_node_test sand_node.o test/sand_node_test.cpp
 	$(CXX) $(CXXFLAGS) $(INCFLAGS) test/sand_node_test.cpp node.o value_node.o sand_node.o -lboost_unit_test_framework -o sand_node_test
 	./sand_node_test
 
-sandpile_test: sand_node_test sandpile.o test/sandpile_test.cpp
-	$(CXX) $(CXXFLAGS) $(INCFLAGS) test/sandpile_test.cpp node.o value_node.o sand_node.o sandpile.o -lboost_unit_test_framework -o sandpile_test
+sandpile_test: sand_node_test sandpile.o random_helper.o test/sandpile_test.cpp
+	$(CXX) $(CXXFLAGS) $(INCFLAGS) test/sandpile_test.cpp node.o value_node.o sand_node.o random_helper.o sandpile.o -lboost_unit_test_framework -o sandpile_test
 	./sandpile_test
 
 linking_test: sandpile_test test/linking_test.cpp include/linking.hpp
-	$(CXX) $(CXXFLAGS) $(INCFLAGS) test/linking_test.cpp node.o value_node.o sand_node.o sandpile.o -lboost_unit_test_framework -o linking_test
+	$(CXX) $(CXXFLAGS) $(INCFLAGS) test/linking_test.cpp node.o value_node.o sand_node.o random_helper.o sandpile.o -lboost_unit_test_framework -o linking_test
 	./linking_test
 
 node.o: src/node.cpp include/node.hpp

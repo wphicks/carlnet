@@ -18,6 +18,9 @@ int Node::get_rank() {
 }
 
 void Node::add_neighbor(shared_ptr<Node> new_neighbor, bool mutual) {
+  if (!new_neighbor){
+    return;
+  }
   if (
       new_neighbor.get() != this &&
       !(this->has_neighbor(new_neighbor)) ) {

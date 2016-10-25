@@ -1,11 +1,19 @@
 #define BOOST_TEST_DYN_LINK
 #define BOOST_TEST_MODULE sand_node_test
 #include <vector>
+#include <memory>
 #include <boost/test/included/unit_test.hpp>
 #include "sand_node.hpp"
 
+using std::make_shared;
+
 struct SandNodeFixture {
-  vector<shared_ptr<SandNode>> node_set{4};
+  vector<shared_ptr<SandNode>> node_set{
+    make_shared<SandNode>(),
+    make_shared<SandNode>(),
+    make_shared<SandNode>(),
+    make_shared<SandNode>()
+  };
   SandNodeFixture() {
   }
   ~SandNodeFixture() {
