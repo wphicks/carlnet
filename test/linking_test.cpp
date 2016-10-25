@@ -15,7 +15,7 @@ struct LinkingFixture {
   static constexpr int pile_width = 3;
   static constexpr int pile_height = pile_size/pile_width;
   SandPile test_pile {pile_size};
-  vector<shared_ptr<ValueNode>> nodes;
+  vector<shared_ptr<IntNode>> nodes;
   LinkingFixture() {
     for (auto node_ : test_pile){
       nodes.push_back(node_);

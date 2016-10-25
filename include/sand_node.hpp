@@ -1,14 +1,14 @@
 #ifndef INCLUDE_SAND_NODE_HPP_
 #define INCLUDE_SAND_NODE_HPP_
 #include "value_node.hpp"
-class SandNode : public ValueNode {
+class SandNode : public IntNode {
   /*! \brief A node in a sandpile model
    */
  public:
     SandNode();
     template <typename Iterator>
     SandNode(Iterator first, Iterator end) :
-        ValueNode{first, end} {
+        IntNode{first, end} {
     }
     ~SandNode();
     void increment_value();
