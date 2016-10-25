@@ -1,26 +1,23 @@
 #include <algorithm>
-#include "sand.hpp"
+#include "sand_node.hpp"
 SandNode::SandNode() :
-    CellNode(), value{0} {
+    ValueNode{} {
 }
 
 SandNode::~SandNode() {
 }
 
-int SandNode::get_value() {
-  return value;
-}
-
-bool SandNode::increment_value() {
+void SandNode::increment_value() {
   ++value;
-  return true;
 }
 
 bool SandNode::iterate() {
   if (get_rank() <= get_value()) {
     value -= get_rank();
     for (auto node : neighbors) {
-      node.lock()->increment_value();
+      shared_ptr<SandNode> valued_node = static_pointer_cast<SandNode>(
+        node.lock());
+      valued_node->increment_value();
     }
     return true;
   }
@@ -28,5 +25,5 @@ bool SandNode::iterate() {
 }
 
 void SandNode::set_max() {
-  value = std::max(0, get_rank() -1);
+  value = std::max(0, get_rank() - 1);
 }

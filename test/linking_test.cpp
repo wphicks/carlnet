@@ -3,7 +3,7 @@
 #include <memory>
 #include <vector>
 #include <boost/test/included/unit_test.hpp>
-#include "sand.hpp"
+#include "value_node.hpp"
 #include "sandpile.hpp"
 #include "linking.hpp"
 
@@ -15,7 +15,7 @@ struct LinkingFixture {
   static constexpr int pile_width = 3;
   static constexpr int pile_height = pile_size/pile_width;
   SandPile test_pile {pile_size};
-  vector<shared_ptr<SandNode>> nodes;
+  vector<shared_ptr<ValueNode>> nodes;
   LinkingFixture() {
     for (auto node_ : test_pile){
       nodes.push_back(node_);
@@ -43,6 +43,8 @@ BOOST_AUTO_TEST_CASE(periodic_grid_connect_test) {
     }
   }
 }
+
+// TODO: This test is insufficient
 BOOST_AUTO_TEST_CASE(sink_grid_test) {
   LinkingFixture link_fix;
   sink_grid_connect(link_fix.test_pile, link_fix.pile_width, link_fix.pile_height);

@@ -3,7 +3,7 @@
 #include <set>
 #include <memory>
 #include <boost/test/included/unit_test.hpp>
-#include "sand.hpp"
+#include "sand_node.hpp"
 #include "sandpile.hpp"
 
 using std::set;
@@ -33,7 +33,7 @@ BOOST_AUTO_TEST_CASE(default_constructor_test) {
 
 BOOST_AUTO_TEST_CASE(iterable_constructor_test) {
   SandPileFixture pile_fix;
-  SandPile test_pile {pile_fix.node_set};
+  SandPile test_pile {pile_fix.node_set.begin(), pile_fix.node_set.end()};
   BOOST_CHECK_EQUAL(test_pile.get_size(), pile_fix.node_set.size());
 }
 
@@ -45,7 +45,7 @@ BOOST_AUTO_TEST_CASE(length_constructor_test) {
 
 BOOST_AUTO_TEST_CASE(iterate_nodes_test) {
   SandPileFixture pile_fix;
-  SandPile test_pile {pile_fix.node_set};
+  SandPile test_pile {pile_fix.node_set.begin(), pile_fix.node_set.end()};
   int size = 0;
   for (auto node_ : test_pile) {
     ++size;
@@ -55,7 +55,7 @@ BOOST_AUTO_TEST_CASE(iterate_nodes_test) {
 
 BOOST_AUTO_TEST_CASE(iterate_test) {
   SandPileFixture pile_fix;
-  SandPile test_pile {pile_fix.node_set};
+  SandPile test_pile {pile_fix.node_set.begin(), pile_fix.node_set.end()};
   shared_ptr<SandNode> test_node{make_shared<SandNode>()};
   for (auto node : pile_fix.node_set) {
     test_node->add_neighbor(node);
@@ -72,7 +72,7 @@ BOOST_AUTO_TEST_CASE(iterate_test) {
 
 BOOST_AUTO_TEST_CASE(set_max_test) {
   SandPileFixture pile_fix;
-  SandPile test_pile {pile_fix.node_set};
+  SandPile test_pile {pile_fix.node_set.begin(), pile_fix.node_set.end()};
   shared_ptr<SandNode> test_node1{make_shared<SandNode>()};
   shared_ptr<SandNode> test_node2{make_shared<SandNode>()};
   for (auto node : pile_fix.node_set) {

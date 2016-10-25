@@ -2,7 +2,7 @@
 #define INCLUDE_SANDPILE_HPP_
 
 #include <vector>
-#include "sand.hpp"
+#include "sand_node.hpp"
 #include "node.hpp"
 using std::make_shared;
 using std::vector;
@@ -11,12 +11,12 @@ using std::iterator;
 class SandPile {
  public:
     SandPile();
-    template <template <typename...> class Iterable>
-    explicit SandPile(const Iterable<shared_ptr<SandNode>> &all_nodes) :
+    template <typename Iterator>
+    SandPile(Iterator first, Iterator end) :
         SandPile{} {
       for (
-          auto node_iter = all_nodes.begin();
-          node_iter != all_nodes.end();
+          auto node_iter = first;
+          node_iter != end;
           ++node_iter) {
         add_node(*node_iter);
       }
@@ -44,13 +44,13 @@ class SandPile {
     void set_max();
     /*! \brief Set all nodes to maximum stable value
      */
-    const shared_ptr<CellNode> get_sink();
+    const shared_ptr<Node> get_sink();
     /*! \brief Return pointer to sink node
      */
 
  protected:
     vector<shared_ptr<SandNode>> nodes;
-    shared_ptr<CellNode> sink;
+    shared_ptr<Node> sink;
     /*! \brief A node which will never avalanche
      *
      */

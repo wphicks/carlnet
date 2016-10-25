@@ -6,18 +6,21 @@ using std::shared_ptr;
 using std::find_if;
 using std::swap;
 
-CellNode::CellNode() :
+Node::Node() :
     rank{0} {
 }
 
-CellNode::~CellNode() {
+Node::~Node() {
 }
 
-int CellNode::get_rank() {
+int Node::get_rank() {
   return rank;
 }
 
-void CellNode::add_neighbor(shared_ptr<CellNode> new_neighbor, bool mutual) {
+void Node::add_neighbor(shared_ptr<Node> new_neighbor, bool mutual) {
+  if (!new_neighbor){
+    return;
+  }
   if (
       new_neighbor.get() != this &&
       !(this->has_neighbor(new_neighbor)) ) {
@@ -29,14 +32,10 @@ void CellNode::add_neighbor(shared_ptr<CellNode> new_neighbor, bool mutual) {
   }
 }
 
-void CellNode::add_neighbor(shared_ptr<CellNode> new_neighbor) {
-  return add_neighbor(new_neighbor, false);
-}
-
-void CellNode::remove_neighbor(shared_ptr<CellNode> old_neighbor, bool mutual) {
+void Node::remove_neighbor(shared_ptr<Node> old_neighbor, bool mutual) {
   auto location = find_if(
       neighbors.begin(), neighbors.end(),
-      [old_neighbor] (weak_ptr<CellNode> elem) {return elem.lock() == old_neighbor;}
+      [old_neighbor] (weak_ptr<Node> elem) {return elem.lock() == old_neighbor;}
   );
   if (location != neighbors.end()) {
     if (location != neighbors.end() - 1) {
@@ -51,27 +50,15 @@ void CellNode::remove_neighbor(shared_ptr<CellNode> old_neighbor, bool mutual) {
   }
 }
 
-void CellNode::remove_neighbor(shared_ptr<CellNode> old_neighbor) {
-  return remove_neighbor(old_neighbor, false);
-}
-
-bool CellNode::has_neighbor(shared_ptr<CellNode> test_neighbor) {
+bool Node::has_neighbor(shared_ptr<Node> test_neighbor) {
   return (
       find_if(
         neighbors.begin(), neighbors.end(),
-        [test_neighbor] (weak_ptr<CellNode> elem) {return elem.lock() == test_neighbor;}
+        [test_neighbor] (weak_ptr<Node> elem) {return elem.lock() == test_neighbor;}
       ) != neighbors.end()
   );
 }
 
-bool CellNode::iterate() {
-  return false;
-}
-
-int CellNode::get_value() {
-  return 0;
-}
-
-bool CellNode::increment_value() {
+bool Node::iterate() {
   return false;
 }
